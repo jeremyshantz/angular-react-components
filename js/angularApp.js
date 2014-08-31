@@ -25,7 +25,7 @@
                 this.scope = $scope; // expose scope to inner directive
 
             }],
-            template: '<div ng-show="model.visible" class="wrapper"><h4>Wrapper for {{model.name}} </h4><div ng-transclude></div></div>'
+            template: '<div ng-show="model.visible" class="jumbotron"><h4>Wrapper for {{model.name}} </h4><div ng-transclude></div></div>'
         };
     });
 
@@ -34,8 +34,8 @@
             restrict: 'E',
             scope: {},
             require: '?^outer',
-            template: '<div class="inner"><h5>Implementation of {{model.message}}</h5>' +
-                '<input type="checkbox" ng-model="model.visible" /> Show'
+            template: '<div class="well"><h5>Implementation of {{model.message}}</h5>' +
+                '<label></label><input type="checkbox" ng-model="model.visible" /> Show</label>'
                 +'</div>',
             compile: function compile(tElement, tAttrs, transclude) {
 

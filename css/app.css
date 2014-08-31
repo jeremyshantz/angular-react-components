@@ -1,17 +1,6 @@
 BODY{
     padding-left: 1%;
 }
-.wrapper {
-    width:50%;
-    border: 1px solid black;
-    margin-bottom: 1%;
-    padding-bottom: 1%
-}
-.inner {
-    width:96%;
-    border: 1px solid red;
-    margin-left:2%;
-    margin-bottom: 1%
-}
 
-.hide { display: none}
+.leftcol { flex:flex-grow; flex-basis: 30%; }
+.rightcol { flex:flex-grow; flex-basis: 30%; margin-left:1%; }

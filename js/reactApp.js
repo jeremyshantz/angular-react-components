@@ -17,7 +17,7 @@ var outer = React.createClass({
         var model = this.state;
 
         var classes = React.addons.classSet({
-            'wrapper': true,
+            'jumbotron': true,
             'hide': !model.visible
         });
 
@@ -42,7 +42,7 @@ var inner = React.createClass({
         var model = this.props.model;
 
         return (
-            <div className="inner"><h5>Implementation of {model.message}</h5>
+            <div className="well"><h5>Implementation of {model.message}</h5>
                 <input type="checkbox" checked={model.visible} onChange={this.toggleDisplay} /> Show
             </div>
             );

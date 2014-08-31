@@ -1,7 +1,7 @@
 angular-react-components
 ========================
 
-A exercise to compare the use of [Angular](https://angularjs.org/) and [React](http://facebook.github.io/react/index.html) in creating stateful components with common behaviour implemented once. [Demo](http://plnkr.co/GEGyDksz9cSBhop8RJe1)
+A exercise to compare the use of [Angular](https://angularjs.org/) and [React](http://facebook.github.io/react/index.html) in creating stateful components with common behaviour implemented once. [Demo](http://plnkr.co/GnAuJm)
 
 Given an array of objects (presumably coming from the server), render each as a UI component with state and behaviour. Each component will have common features that must be implemented DRYly. In the current exercise, the common behaviour is to bind the visibility of the component to the `visible` property of the object. 
 

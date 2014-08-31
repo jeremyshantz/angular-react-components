@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+<head>
+    <title>Component Demo</title>
+    <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+
+<a href="https://github.com/jeremyshantz/angular-react-components">back</a>
+
+<div style="display:flex">
+
+    <div ng-app="demo" id="angular" style="flex:flex-grow; flex-basis: 30%;" >
+        <h2>Angular</h2>
+        <outer><inner name="control1"></inner></outer>
+        <outer><inner name="control2"></inner></outer>
+        <outer><inner name="control3"></inner></outer>
+    </div>
+
+    <div id="react" style="flex:flex-grow; flex-basis: 30%;"></div>
+
+</div>
+
+<script>
+    window.FormData =
+[{ name: 'control1', visible: true, message:'One' },
+ { name: 'control2', visible: true, message:'Two' },
+ { name: 'control3', visible: true, message:'Three' }];
+
+</script>
+
+<!-- vendor libraries -->
+    <script src="js/vendors/ecmascript6.polyfills.js"></script>
+<script src="js/vendors/angular/angular.min.js"></script>
+<script src="js/vendors/react/react-with-addons.js"></script>
+<script src="js/vendors/react/JSXTransformer.js"></script>
+<!-- Our applications-->
+<script src="js/reactApp.js" type="text/jsx" ></script>
+<script src="js/angularApp.js"></script>
+
+</body>
+</html>

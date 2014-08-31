@@ -40,9 +40,4 @@ var models = this.props.data.map(function(item, i){
 
 * React may also provide a solution too. I am much more familiar with Angular than with React and it is possible that my solution does not use React in an idiomatic way.
 
-* Note that in the current exercise we only have only component type. In a more realistic scenario, there would be many types each inheriting the common behaviour.
-
-<<<<<<< HEAD
-=======
-
->>>>>>> 8857c1f8686b54d911cdf675f601be299c2c9028
+* Note that in the current exercise we only have one component type. In a more realistic scenario, there would be many types each inheriting the common behaviour.

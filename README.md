@@ -13,11 +13,11 @@ We nest directives using transclusion, passing the name of the object into the i
 
 ``` <outer><inner name="control1"></inner></outer> ```
 
-The object is also passed to the parent `$scope` by requiring (`require: '?^outer'`) the parent and receiving the parent controller in the `postList` function. The `<outer>` directive wraps the `<inner>` in markup, using `ng-show` to bind to `visible`. It also display's the object's name. The `<inner>` directive binds a checkbox to `visible`. Since `<outer>` and `<inner>` share the same model instance, these bindings succeed in passing events from child to parent.
+The object is also passed to the parent `$scope` by requiring (`require: '?^outer'`) the parent and receiving the parent controller in the `postList` function. The `<outer>` directive wraps the `<inner>` in markup, using `ng-show` to bind to `visible`. It also display's the object's name. The `<inner>` directive binds a checkbox to `visible`. Since `<outer>` and `<inner>` share the same model instance, these bindings succeed even though the directives are isolated. 
 
 
 ## React
-We nest outer and inner classes, this time passing the full object as a `prop` to the outer control. The outer class receives the object instead of the inner because data only flows from parent to child. The outer class binds its visibility to the `visible` property. The object is passed to the child as a `prop` along with a callback which the child uses to signal the parent to toggle the `visible` property when the checkbox changes. Here the outer and inner classes do not share the same instance of the object so an explicit callback must be passed to the child.
+We again nest outer and inner classes, this time passing the full object as a `prop` to the outer control. The outer class receives the object instead of the inner because data only flows from parent to child in React. The outer class binds its visibility to the `visible` property. The object is passed to the child as a `prop` along with a callback which the child uses to signal the parent to toggle the `visible` property when the checkbox changes. Here the outer and inner classes do not share the same instance of the object so an explicit callback must be passed to the child.
 
 ## Notes
 

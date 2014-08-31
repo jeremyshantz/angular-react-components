@@ -21,9 +21,9 @@ We again nest outer and inner classes, this time passing the full object as a `p
 
 ## Notes
 
-* In the Angular implementation, the outer and inner directives share scope. The allows for events originating in the inner to mutate the outer without an hook up other than simple declarative bindings. (The manner in which shared scope is achieved in open to debate, but I have this pattern running in a large production application to good effect.)
+* In the Angular implementation, the outer and inner directives share the same model object instance. The allows for events originating in the inner to mutate the outer without manual  hook up other than simple declarative bindings. (The manner in which shared scope is achieved in open to debate, but I have this pattern running in a large production application to good effect.)
 
-* In the React implementation there is no shared state. The parent must pass to the child callbacks for each type of signal it wishes to receive from the child. In the current implemenation we are concerned with visibility. In a more complex application, we may wish to handle events for enable/disable, debugging, validity and more. This requires more code in `<inner>` to handle these callbacks than I wanted. With further exploration I may find a more idiomatic pattern, perhaps using mixins.
+* In the React implementation there is no shared state. The parent must pass to the child callbacks for each type of signal it wishes to receive from the child. In the current implemenation we are concerned with visibility. In a more complex application, we may wish to handle events for enable/disable, debugging, validity and more. This requires more code in `<inner>` to handle these callbacks than I wanted. With further exploration I may find a more idiomatic pattern, perhaps using mixins or [Flux](http://facebook.github.io/react/blog/2014/05/06/flux.html).
 
 * Angular requires that the directives be declared in markup, requiring that we render the tags server-side. Undoubtedly we could iterate over the array and insert the tags into DOM, but this would require us to prevent automatic initialization and [manually bootstrap the Angular application](https://docs.angularjs.org/guide/bootstrap).
 

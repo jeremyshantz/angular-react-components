@@ -58,7 +58,9 @@ var app = React.createClass({
             return <outer key={i} model={item} ><inner /></outer>
         });
 
-        return (<div><h2>React</h2>{models}</div>);
+        return (
+            <div><h2>React</h2>{models}</div>
+            );
     }
 });
 

@@ -3,7 +3,8 @@ angular-react-components
 
 A exercise to compare the use of [Angular](https://angularjs.org/) and [React](http://facebook.github.io/react/index.html) in creating stateful components with common behaviour implemented once. [Demo](http://plnkr.co/GnAuJm)
 
-Given an array of objects (presumably coming from the server), render each as a UI component with state and behaviour. Each component will have common features that must be implemented DRYly. In the current exercise, the common behaviour is to bind the visibility of the component to the `visible` property of the object. 
+Given an array of objects (presumably coming from the server), render each as a UI component with state and behaviour. Each component will have common features that must be implemented DRYly. In the current exercise, the common behaviour is to bind the visibility of the component to the `visible` property of the object. We do this by implementing a base or wrapper component. The goal is the outer and inner components share enough state that a property mutation originating in the inner component triggers a binding declared in the outer component. In a large application, there would be many different type of inner compoments so pulling common behaviour into an outer component avoids duplication. 
+
 
 #### The object 
 ``` { name: 'control1', visible: true, message:'One' } ```

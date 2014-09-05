@@ -20,7 +20,7 @@ The object is also passed to the parent `$scope` by requiring (`require: '?^oute
 ## React
 We again nest outer and inner classes, this time passing the full object as a `prop` to the outer control which converts it to state via `getInitialState`. The outer class receives the object instead of the inner because data only flows from parent to child in React. The outer class binds its visibility to the `visible` property. The object is passed to the child as a `prop` along with [two-way binding helper object](http://facebook.github.io/react/docs/two-way-binding-helpers.html) which the child assigns to the `checkedLink` property of the checkbox.
 
-In our implementation, the `app` class assembles the application by mapping over the data set and outputting nested `<outer key={i} model={item} ><inner /></outer>`. This means that `outer` does not create `inner` itself and misses out on settings its properties. Instead, it accesses the child via `this.props.children` and decorates it with properties through a call to `React.addons.cloneWithProps`. It is here that the state object and the two-way binding helper is made available to `inner`.
+In our implementation, the `app` class assembles the application by mapping over the data set and outputting nested `<outer key={i} model={item} ><inner /></outer>` instances. This means that `outer` does not create `inner` itself and misses out on setting its properties. Instead, it accesses the child via `this.props.children` and decorates it with properties through a call to `React.addons.cloneWithProps`. It is here that the state object and the two-way binding helper are made available to `inner`.
 
 ## Notes
 

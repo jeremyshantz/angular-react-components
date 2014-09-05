@@ -18,13 +18,13 @@ The object is also passed to the parent `$scope` by requiring (`require: '?^oute
 
 
 ## React
-We again nest outer and inner classes, this time passing the full object as a `prop` to the outer control. The outer class receives the object instead of the inner because data only flows from parent to child in React. The outer class binds its visibility to the `visible` property. The object is passed to the child as a `prop` along with a callback which the child uses to signal the parent to toggle the `visible` property when the checkbox changes. Here the outer and inner classes do not share the same instance of the object so an explicit callback must be passed to the child.
+We again nest outer and inner classes, this time passing the full object as a `prop` to the outer control which converts it to state via `getInitialState`. The outer class receives the object instead of the inner because data only flows from parent to child in React. The outer class binds its visibility to the `visible` property. The object is passed to the child as a `prop` along with [two-way binding helper object](http://facebook.github.io/react/docs/two-way-binding-helpers.html) available through the `ReactLink` add-on which the child uses to bind the `checkedLink` property of the checkbox.
 
 ## Notes
 
 * In the Angular implementation, the outer and inner directives share the same model object instance. The allows for events originating in the inner to mutate the outer without manual  hook up other than simple declarative bindings. (The manner in which shared scope is achieved in open to debate, but I have this pattern running in a large production application to good effect.)
 
-* In the React implementation there is no shared state. The parent must pass to the child callbacks for each type of signal it wishes to receive from the child. In the current implemenation we are concerned with visibility. In a more complex application, we may wish to handle events for enable/disable, debugging, validity and more. This requires more code in `<inner>` to handle these callbacks than I wanted. With further exploration I may find a more idiomatic pattern, perhaps using mixins or [Flux](http://facebook.github.io/react/blog/2014/05/06/flux.html).
+* In the React implementation there is no shared state. The parent must pass to the child callbacks for each type of signal it wishes to receive from the child. In the current implemenation we are concerned with visibility. In a more complex application, we may wish to handle events for validity, enable/disable, debugging and more. We use the `ReactLink` add-on to avoid having to to created change event handles in the `inner` that call a `prop` function passed in by `outer`.
 
 * Angular requires that the directives be declared in markup, requiring that we render the tags server-side. Undoubtedly we could iterate over the array and insert the tags into DOM, but this would require us to prevent automatic initialization and [manually bootstrap the Angular application](https://docs.angularjs.org/guide/bootstrap).
 

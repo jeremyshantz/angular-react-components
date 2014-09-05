@@ -23,9 +23,9 @@
     <div class="rightcol">
         <h2>Objects</h2>
         <pre>
-[{ name: 'control1', visible: true, message:'One' },
- { name: 'control2', visible: true, message:'Two' },
- { name: 'control3', visible: true, message:'Three' }]
+[{ name: 'control1', visible: true, message:'One', controltype:'innerA' },
+ { name: 'control2', visible: true, message:'Two', controltype:'innerB' },
+ { name: 'control3', visible: true, message:'Three', controltype:'innerB' }]
 
         </pre>
     </div>
@@ -34,9 +34,9 @@
 
 <script>
     window.FormData =
-[{ name: 'control1', visible: true, message:'One' },
- { name: 'control2', visible: true, message:'Two' },
- { name: 'control3', visible: true, message:'Three' }];
+            [{ name: 'control1', visible: true, message:'One', controltype:'innerA' },
+                { name: 'control2', visible: true, message:'Two', controltype:'innerB' },
+                { name: 'control3', visible: true, message:'Three', controltype:'innerB' }];
 
 </script>
 

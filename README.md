@@ -30,7 +30,7 @@ In our implementation, the `app` class assembles the application by mapping over
 
 * Angular requires that the directives be declared in markup, requiring that we render the tags server-side. Undoubtedly we could iterate over the array and insert the tags into DOM, but this would require us to prevent automatic initialization and [manually bootstrap the Angular application](https://docs.angularjs.org/guide/bootstrap).
 
-* Since React allows us to build the entire UI in Javascript, we can build our class instances by mapping over the object array.
+* Since React allows us to build the entire UI in Javascript, we can build our class instances by mapping over the object array. But imagine we want to choose the type of the inner control based on the value of a property of `item`. It is not clear how this could be accomplished in JSX. This is invalid: `<{item.innertype} />`. We will attempt this using `React.DOM`.
 
 ```javascript
 var models = this.props.data.map(function(item, i){

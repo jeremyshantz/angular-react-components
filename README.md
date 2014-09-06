@@ -24,7 +24,7 @@ In our implementation, the `app` class assembles the application by mapping over
 
 ## Notes
 
-* In the Angular implementation, the outer and inner directives share the same model object instance. The allows for events originating in the inner to mutate the outer without manual  hook up other than simple declarative bindings. (The manner in which shared scope is achieved in open to debate, but I have this pattern running in a large production application to good effect.)
+* In the Angular implementation, the outer and inner directives share the same model object instance. This allows for events originating in the inner to mutate the outer without manual hook up other than simple declarative bindings. (The manner in which shared scope is achieved is open to debate, but I have this pattern running in a large production application to good effect.)
 
 * In the React implementation there is no shared state. The parent must pass to the child callbacks for each type of signal it wishes to receive from the child. In the current implemenation we are concerned with visibility. In a more complex application, we may wish to handle events for validity, enable/disable, debugging and more. We use the `ReactLink` add-on to avoid having to to created change event handlers in the `inner` that call a `prop` function passed in by `outer`.
 

@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Component Demo</title>
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="js/vendors/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="css/app.css">
 </head>
 <body>
@@ -13,21 +13,17 @@
 
     <div ng-app="demo" id="angular" class="leftcol" >
         <h2>Angular</h2>
-        <outer><inner name="control1"></inner></outer>
-        <outer><inner name="control2"></inner></outer>
-        <outer><inner name="control3"></inner></outer>
+        <outer><inner-a name="control1"></inner-a></outer>
+        <outer><inner-b name="control2"></inner-b></outer>
+        <outer><inner-b name="control3"></inner-b></outer>
+
     </div>
 
     <div id="react" class="rightcol"></div>
 
     <div class="rightcol">
         <h2>Objects</h2>
-        <pre>
-[{ name: 'control1', visible: true, message:'One', controltype:'innerA' },
- { name: 'control2', visible: true, message:'Two', controltype:'innerB' },
- { name: 'control3', visible: true, message:'Three', controltype:'innerB' }]
-
-        </pre>
+        <pre id="debug"></pre>
     </div>
 
 </div>
@@ -37,6 +33,8 @@
             [{ name: 'control1', visible: true, message:'One', controltype:'innerA' },
                 { name: 'control2', visible: true, message:'Two', controltype:'innerB' },
                 { name: 'control3', visible: true, message:'Three', controltype:'innerB' }];
+
+
 
 </script>
 
@@ -48,5 +46,8 @@
 <script src="js/compiled/reactApp.js" ></script>
 <script src="js/app/angularApp.js"></script>
 
+<script>
+document.getElementById('debug').innerHTML = angular.toJson(window.FormData);
+</script>
 </body>
 </html>

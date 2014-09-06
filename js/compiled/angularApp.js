@@ -29,12 +29,41 @@
         };
     });
 
-    app.directive('inner', [ 'FormData', function (data) {
+    app.directive('innerA', [ 'FormData', function (data) {
         return {
             restrict: 'E',
             scope: {},
             require: '?^outer',
-            template: '<div class="well"><h5>Implementation of {{model.message}}</h5>' +
+            template: '<div class="well"><h5>Implementation of {{model.message}} - INNER A</h5>' +
+                '<label></label><input type="checkbox" ng-model="model.visible" /> Show</label>'
+                +'</div>',
+            compile: function compile(tElement, tAttrs, transclude) {
+
+                var model = data.get(tAttrs.name);
+
+                return {
+                    pre: function preLink(scope, element, attrs) {
+
+                        scope.model = model;
+                    },
+
+                    post: function postLink(scope, element, attrs, parent) {
+
+                        if (parent && parent.scope) {
+                            parent.scope.model = model; // attach model to parent scope
+                        }
+                    }
+                }
+            }
+        };
+    }]);
+
+    app.directive('innerB', [ 'FormData', function (data) {
+        return {
+            restrict: 'E',
+            scope: {},
+            require: '?^outer',
+            template: '<div class="well"><h5>Implementation of {{model.message}} - INNER B</h5>' +
                 '<label></label><input type="checkbox" ng-model="model.visible" /> Show</label>'
                 +'</div>',
             compile: function compile(tElement, tAttrs, transclude) {

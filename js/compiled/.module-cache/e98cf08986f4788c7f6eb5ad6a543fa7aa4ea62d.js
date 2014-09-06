@@ -2,7 +2,7 @@
 
 'use strict';
 
-var outer = React.createClass({
+var outer = React.createClass({displayName: 'outer',
 
     getInitialState: function () {
 
@@ -16,7 +16,7 @@ var outer = React.createClass({
 
         this.setState(state);
     },
-
+    
     render: function () {
 
         var model = this.state;
@@ -36,35 +36,35 @@ var outer = React.createClass({
         });
 
         return (
-            <div className={classes}><h4>Wrapper of {model.name}</h4>{child}</div>
+            React.DOM.div({className: classes}, React.DOM.h4(null, "Wrapper of ", model.name), child)
             );
     }
 });
 
-var innerA = React.createClass({
+var innerA = React.createClass({displayName: 'innerA',
 
     render: function () {
 
         var model = this.props.model;
 
         return (
-            <div className="well"><h5>Implementation of {model.message} - INNER A</h5>
-                <input type="checkbox" checkedLink={this.props.display} /> Show
-            </div>
+            React.DOM.div({className: "well"}, React.DOM.h5(null, "Implementation of ", model.message, " - INNER A"), 
+                React.DOM.input({type: "checkbox", checkedLink: this.props.display}), " Show"
+            )
             );
     }
 });
 
-var innerB = React.createClass({
+var innerB = React.createClass({displayName: 'innerB',
 
     render: function () {
 
         var model = this.props.model;
 
         return (
-            <div className="well"><h5>Implementation of {model.message} - INNER B</h5>
-                <input type="checkbox" checkedLink={this.props.display} /> Show
-            </div>
+            React.DOM.div({className: "well"}, React.DOM.h5(null, "Implementation of ", model.message, " - INNER B"), 
+                React.DOM.input({type: "checkbox", checkedLink: this.props.display}), " Show"
+            )
             );
     }
 });
@@ -87,6 +87,6 @@ var app = React.createClass({displayName: 'app',
 });
 
 React.renderComponent(
-    <app data={window.FormData} />, document.getElementById('react')
+    app({data: window.FormData}), document.getElementById('react')
     // later we can wrap the reference to window.FormData in a factory object, and eventually have the object fetch the data from the server
 );

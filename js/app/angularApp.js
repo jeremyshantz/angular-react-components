@@ -15,7 +15,13 @@
         };
     }]);
 
-    app.directive('outer', function () {
+    // a factory to wrap the call to window.eventStub
+    app.factory('Events', [function () {
+
+        return window.eventStub;
+    }]);
+
+    app.directive('outer', function (Events) {
         return {
             restrict: 'E',
             scope: {},
@@ -25,6 +31,27 @@
                 this.scope = $scope; // expose scope to inner directive
 
             }],
+            compile: function compile(tElement, tAttrs, transclude) {
+
+                return {
+                    pre: function preLink(scope, element, attrs) {
+
+                    },
+
+                    post: function postLink(scope, element, attrs, parent) {
+
+                        Events.register({
+                            name: scope.model.name,
+                            func: function (obj) {
+                                scope.$apply(function(){
+                                    scope.model.visible = obj.visible;
+                                });
+
+                            }
+                        });
+                    }
+                }
+            },
             template: '<div ng-show="model.visible" class="jumbotron"><h4>Wrapper for {{model.name}} </h4><div ng-transclude></div></div>'
         };
     });
@@ -43,7 +70,6 @@
 
                 return {
                     pre: function preLink(scope, element, attrs) {
-
                         scope.model = model;
                     },
 

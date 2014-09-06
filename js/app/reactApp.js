@@ -1,92 +1,107 @@
-/** @jsx React.DOM */
 
-'use strict';
+    /** @jsx React.DOM */
 
-var outer = React.createClass({
+    'use strict';
 
-    getInitialState: function () {
+    var outer = React.createClass({
 
-        return this.props.model; // probably an anti-pattern; use name property to pull state from factory object
-    },
+        getInitialState: function () {
 
-    changeState: function (property, newValue) {
+            return this.props.model; // probably an anti-pattern; use name property to pull state from factory object
+        },
 
-        var state = {};
-        state[property] = newValue;
+        changeState: function (property, newValue) {
 
-        this.setState(state);
-    },
+            var state = {};
+            state[property] = newValue;
 
-    render: function () {
+            this.setState(state);
+        },
 
-        var model = this.state;
-        var self = this;
+        componentWillMount: function() {
 
-        var classes = React.addons.classSet({
-            'jumbotron': true,
-            'hide': !model.visible
-        });
+            var self = this;
 
-        var child = React.addons.cloneWithProps(React.Children.only(this.props.children), {
-            model: this.state,
-            display: {
-                value: this.state.visible,
-                requestChange: function(newvalue){ self.changeState('visible', newvalue); }
-            }
-        });
+            var o = {
+                name: self.state.name,
+                func: function (state) {
+                    self.setState(state);
+                }
+            };
 
-        return (
-            <div className={classes}><h4>Wrapper of {model.name}</h4>{child}</div>
-            );
-    }
-});
+            window.eventStub.register(o);
+        },
 
-var innerA = React.createClass({
+        render: function () {
 
-    render: function () {
+            var model = this.state;
+            var self = this;
 
-        var model = this.props.model;
+            var classes = React.addons.classSet({
+                'jumbotron': true,
+                'hide': !model.visible
+            });
 
-        return (
-            <div className="well"><h5>Implementation of {model.message} - INNER A</h5>
-                <input type="checkbox" checkedLink={this.props.display} /> Show
-            </div>
-            );
-    }
-});
+            var child = React.addons.cloneWithProps(React.Children.only(this.props.children), {
+                model: this.state,
+                display: {
+                    value: this.state.visible,
+                    requestChange: function(newValue){ self.changeState('visible', newValue); }
+                }
+            });
 
-var innerB = React.createClass({
+            return (
+                <div className={classes}><h4>Wrapper of {model.name}</h4>{child}</div>
+                );
+        }
+    });
 
-    render: function () {
+    var innerA = React.createClass({
 
-        var model = this.props.model;
+        render: function () {
 
-        return (
-            <div className="well"><h5>Implementation of {model.message} - INNER B</h5>
-                <input type="checkbox" checkedLink={this.props.display} /> Show
-            </div>
-            );
-    }
-});
+            var model = this.props.model;
 
-var app = React.createClass({displayName: 'app',
+            return (
+                <div className="well"><h5>Implementation of {model.message} - INNER A</h5>
+                    <input type="checkbox" checkedLink={this.props.display} /> Show
+                </div>
+                );
+        }
+    });
 
-    render: function() {
+    var innerB = React.createClass({
 
-        var models = this.props.data.map(function(item, i){
+        render: function () {
 
-            var func = item.controltype === 'innerA' ? innerA : innerB;
+            var model = this.props.model;
 
-            return outer({key: i, model: item}, func(null))
-        });
+            return (
+                <div className="well"><h5>Implementation of {model.message} - INNER B</h5>
+                    <input type="checkbox" checkedLink={this.props.display} /> Show
+                </div>
+                );
+        }
+    });
 
-        return (
-            React.DOM.div(null, React.DOM.h2(null, "React"), models)
-            );
-    }
-});
+    var app = React.createClass({displayName: 'app',
 
-React.renderComponent(
-    <app data={window.FormData} />, document.getElementById('react')
-    // later we can wrap the reference to window.FormData in a factory object, and eventually have the object fetch the data from the server
-);
+        render: function() {
+
+            var models = this.props.data.map(function(item, i){
+
+                var func = item.controltype === 'innerA' ? innerA : innerB;
+
+                return outer({key: i, model: item}, func(null))
+            });
+
+            return (
+                React.DOM.div(null, React.DOM.h2(null, "React"), models)
+                );
+        }
+    });
+
+    React.renderComponent(
+        <app data={window.FormData} />, document.getElementById('react')
+        // later we can wrap the reference to window.FormData in a factory object, and eventually have the object fetch the data from the server
+    );

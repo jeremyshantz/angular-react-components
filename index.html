@@ -9,6 +9,8 @@
 
 <a href="https://github.com/jeremyshantz/angular-react-components">back</a>
 
+<button id="toggle" type="button">Toggle</button>
+
 <div style="display:flex">
 
     <div ng-app="demo" id="angular" class="leftcol" >
@@ -16,7 +18,6 @@
         <outer><inner-a name="control1"></inner-a></outer>
         <outer><inner-b name="control2"></inner-b></outer>
         <outer><inner-b name="control3"></inner-b></outer>
-
     </div>
 
     <div id="react" class="rightcol"></div>
@@ -29,17 +30,38 @@
 </div>
 
 <script>
-    window.FormData =
-            [{ name: 'control1', visible: true, message:'One', controltype:'innerA' },
-                { name: 'control2', visible: true, message:'Two', controltype:'innerB' },
-                { name: 'control3', visible: true, message:'Three', controltype:'innerB' }];
 
+    var eventStub = {
+        objects: [],
+        register: function(func){
+            this.objects.push(func);
+        }
+    };
 
+    window.FormData = [
+        { name: 'control1', visible: true, message:'One',   controltype:'innerA' },
+        { name: 'control2', visible: true, message:'Two',   controltype:'innerB' },
+        { name: 'control3', visible: true, message:'Three', controltype:'innerB' }
+    ];
+
+    document.getElementById('toggle').onclick = function() {
+
+        window.FormData.forEach(function(data){
+
+            data.visible = !data.visible;
+
+            var handlers = window.eventStub.objects.filter(function(handler) { return handler.name === data.name; });
+
+            handlers.forEach(function(handler){
+                handler.func(data);
+            });
+        });
+    };
 
 </script>
 
 <!-- vendor libraries -->
-    <script src="js/vendors/ecmascript6.polyfills.js"></script>
+<script src="js/vendors/ecmascript6.polyfills.js"></script>
 <script src="js/vendors/angular/angular.min.js"></script>
 <script src="js/vendors/react/react-with-addons.js"></script>
 <!-- Our applications-->
